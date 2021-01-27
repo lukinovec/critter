@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PostLikeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
-use App\Models\Profile;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,32 +20,23 @@ use App\Models\Profile;
 */
 
 Route::get('/', function () {
-    return view('posts', [
-        "posts" => Post::all()
-    ]);
+    return view('posts');
 });
+
+Route::get('/get-posts', [PostController::class, 'index']);
+Route::post('/new-post', [PostController::class, 'store']);
+Route::post('/delete-post', [PostController::class, 'destroy']);
 
 Route::get('/logout', function () {
     Auth::logout();
     return redirect('/');
 });
 
-Route::post('/post-crit', function () {
-    Post::create([
-        "profile_id" => Auth::id(),
-        "text" => request("crit"),
-    ]);
-    return redirect('/');
-});
+Route::get('/get-post-likes', [PostLikeController::class, 'index']);
+Route::post('/post-like', [PostLikeController::class, 'store']);
+Route::post('/post-unlike', [PostLikeController::class, 'destroy']);
 
-Route::get('/user/{profile_id}', function ($profile_id) {
-    return view('profile', [
-        "profile" => Profile::find($profile_id)
-    ]);
-});
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
+Route::get('/get-user', [ProfileController::class, 'index']);
+Route::get('/user/{profile_id}', [ProfileController::class, 'show']);
 
 require __DIR__ . '/auth.php';

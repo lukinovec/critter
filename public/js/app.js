@@ -3795,6 +3795,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 
+__webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

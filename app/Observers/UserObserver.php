@@ -14,7 +14,7 @@ class UserObserver
         Profile::create([
             "user_id" => $user->id,
             "nickname" => $user->name,
-            "image" => url(asset('/user.png'))
+            "image" => url(asset('/profile.svg'))
         ]);
     }
 }

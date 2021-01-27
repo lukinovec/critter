@@ -14,8 +14,17 @@ class Profile extends Model
     {
         return $this->hasMany(Follower::class);
     }
+
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+    public function postLikes()
+    {
+        return $this->hasMany(PostLike::class);
+    }
+    public function commentLikes()
+    {
+        return $this->hasMany(CommentLike::class);
     }
 }
