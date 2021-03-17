@@ -9,6 +9,7 @@ class Profile extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $with = ["posts", "likes"];
 
     public function followers()
     {
@@ -19,12 +20,9 @@ class Profile extends Model
     {
         return $this->hasMany(Post::class);
     }
-    public function postLikes()
+
+    public function likes()
     {
-        return $this->hasMany(PostLike::class);
-    }
-    public function commentLikes()
-    {
-        return $this->hasMany(CommentLike::class);
+        return $this->hasMany(Like::class);
     }
 }

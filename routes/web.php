@@ -1,13 +1,10 @@
 <?php
 
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PostLikeController;
+use App\Http\Livewire\ProfileComponent;
+use App\Http\Livewire\Post;
+use App\Http\Livewire\Posts;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Post;
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,24 +16,15 @@ use App\Models\Post;
 |
 */
 
-Route::get('/', function () {
-    return view('posts');
-});
+Route::get('/', Posts::class)->name("dashboard");
 
-Route::get('/get-posts', [PostController::class, 'index']);
-Route::post('/new-post', [PostController::class, 'store']);
-Route::post('/delete-post', [PostController::class, 'destroy']);
+Route::get('/post/{post_id}', Post::class)->name("show-post");
 
 Route::get('/logout', function () {
     Auth::logout();
     return redirect('/');
-});
+})->name("logout");
 
-Route::get('/get-post-likes', [PostLikeController::class, 'index']);
-Route::post('/post-like', [PostLikeController::class, 'store']);
-Route::post('/post-unlike', [PostLikeController::class, 'destroy']);
-
-Route::get('/get-user', [ProfileController::class, 'index']);
-Route::get('/user/{profile_id}', [ProfileController::class, 'show']);
+Route::get('/user/{profile}', ProfileComponent::class)->name('profile');
 
 require __DIR__ . '/auth.php';
