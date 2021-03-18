@@ -26,6 +26,7 @@ class Posts extends ParentComponent
                 "text" => $this->newPostText,
             ]);
             // emit event pro refresh postů
+            $this->newPostText = "";
             $this->emitSelf("post-change");
             return "Successfuly created new post.";
         }

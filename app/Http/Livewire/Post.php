@@ -7,7 +7,7 @@ use App\Services\Comment as CommentService;
 
 class Post extends LikeableComponent
 {
-    public $text;
+    public string $comment_text = "";
 
     public function mount(\App\Models\Post $post)
     {
@@ -19,8 +19,9 @@ class Post extends LikeableComponent
         $comment->create([
             "profile_id" => auth()->id(),
             "post_id" => $this->item->id,
-            "text" => $this->text,
+            "text" => $this->comment_text
         ]);
+        $this->emit("post-change");
     }
 
     public function render()

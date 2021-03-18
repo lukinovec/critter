@@ -8,14 +8,10 @@ class LikeableComponent extends Component {
     public $item;
     public $likes;
 
-    public function dehydrate()
-    {
-        $this->emit("post-change");
-    }
-
     protected function get_likeable() {
         return (new Service(get_called_class()))->likeable();
     }
+
 
     public function likes_count() {
         return $this->item->likes->count();
@@ -24,16 +20,19 @@ class LikeableComponent extends Component {
     public function delete()
     {
         $this->get_likeable()->delete($this->item->id);
+        $this->emit("post-change");
     }
 
     public function like()
     {
         $this->get_likeable()->like($this->item->id);
+        $this->emit("post-change");
     }
 
     public function unlike()
     {
-        return $this->get_likeable()->unlike($this->item->id, auth()->id());
+        $this->get_likeable()->unlike($this->item->id, auth()->id());
+        $this->emit("post-change");
     }
 
     public function render_like_section()

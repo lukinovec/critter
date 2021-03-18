@@ -5,7 +5,7 @@
             What's on your mind?
         </span>
         <div class="flex p-2 m-2">
-            <input class="w-3/4 border-gray-200 rounded-lg" type="text" name="crit" wire:model="newPostText" placeholder="Your crit...">
+            <input class="w-3/4 border-gray-200 rounded-lg" type="text" name="crit" wire:model.debounce="newPostText" placeholder="Your crit...">
             <button class="p-2 m-1 border border-gray-200 rounded-lg hover:bg-gray-100" wire:click="createPost()">Post</button>
         </div>
     </span>

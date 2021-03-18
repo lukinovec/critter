@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileComponent extends Component
 {
+    public $item;
     protected $listeners = ["post-change" => "mount"];
 
     public function mount(Profile $profile)
     {
-        $this->item = $profile;
+        $this->item = $profile->exists ? $profile : Profile::find($this->item->id);
     }
 
     public function render()

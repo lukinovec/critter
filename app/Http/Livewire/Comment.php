@@ -4,8 +4,6 @@ namespace App\Http\Livewire;
 
 class Comment extends LikeableComponent
 {
-    public $item;
-
     public function mount(\App\Models\Comment $comment)
     {
         $this->item = $comment;
