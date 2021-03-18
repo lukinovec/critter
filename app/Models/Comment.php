@@ -14,7 +14,7 @@ class Comment extends Model
 
     public function likes()
     {
-        return $this->hasMany(CommentLike::class);
+        return $this->hasMany(Like::class, "parent_id");
     }
 
     public function author()

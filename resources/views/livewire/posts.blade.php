@@ -8,6 +8,9 @@
             <input class="w-3/4 border-gray-200 rounded-lg" type="text" name="crit" wire:model.debounce="newPostText" placeholder="Your crit...">
             <button class="p-2 m-1 border border-gray-200 rounded-lg hover:bg-gray-100" wire:click="createPost()">Post</button>
         </div>
+        Upload Image
+            <input type="file" wire:model="photo">
+                @error('photo') <span class="error">{{ $message }}</span> @enderror
     </span>
     @endauth
     <div class="z-30 flex-1 h-full crit-container">

@@ -22,6 +22,7 @@
     <span class="p-2 m-1 rounded-lg">
         {{ $item->text }}
     </span>
+    <img src="{{ asset($item->image) }}" alt="">
     <div class="flex justify-between p-1 m-1 text-xs rounded-lg">
         {!! $this->render_like_section() !!}
     </div>
