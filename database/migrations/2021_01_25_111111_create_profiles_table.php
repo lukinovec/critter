@@ -16,11 +16,9 @@ class CreateProfilesTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId("user_id")->constrained();
-
-            $table->text("bio")->default("Fresh profile");
+            $table->text("bio");
             $table->string("nickname");
             $table->text("image");
-
             $table->timestamps();
         });
     }
