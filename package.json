@@ -20,6 +20,7 @@
         "tailwindcss": "^2.0.2"
     },
     "dependencies": {
-        "alpinejs": "^2.8.0"
+        "alpinejs": "^2.8.0",
+        "sweetalert2": "^10.15.6"
     }
 }

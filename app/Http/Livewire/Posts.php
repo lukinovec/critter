@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\WithFileUploads;
 use App\Services\Post as PostService;
+use Illuminate\Support\Facades\Storage;
 
 class Posts extends ParentComponent
 {
@@ -11,8 +12,11 @@ class Posts extends ParentComponent
     public $posts;
     protected $post_service;
     public $profile;
+    public $image_name;
+    // protected $image;
     public $newPostText;
-    public $photo;
+
+    protected $listeners = ["upload-image" => "saveImage", "post-change" => "mount"];
 
     public function mount(PostService $post_service): void
     {
@@ -21,12 +25,13 @@ class Posts extends ParentComponent
         $this->profile = auth()->user()->profile ?? "User is not logged in";
     }
 
-    public function saveImage()
+    public function saveImage($image)
     {
-        $this->validate([
-            'photo' => 'image|max:20480',
-        ]);
-        return $this->photo->store("user_uploads");
+        $image = str_replace('data:image/jpeg;base64,', '', $image);
+        $image = str_replace('data:image/png;base64,', '', $image);
+        $image = str_replace(' ', '+', $image);
+        $this->image_name = "user_uploads/" . ((string) time()) . ".jpg";
+        Storage::put($this->image_name, base64_decode($image));
     }
 
     public function createPost(PostService $post_service): string
@@ -35,7 +40,7 @@ class Posts extends ParentComponent
             $post_service->create([
                 "profile_id" => auth()->id(),
                 "text" => $this->newPostText,
-                "image" => $this->saveImage()
+                "image" => $this->image_name ?? ""
             ]);
             // emit event pro refresh postů
             $this->newPostText = "";
@@ -43,6 +48,11 @@ class Posts extends ParentComponent
             return "Successfuly created new post.";
         }
         return "Text has to be at least 3 characters long.";
+    }
+
+    public function testAlert()
+    {
+        $this->dispatchBrowserEvent("swal:test");
     }
 
     public function render()

@@ -1,5 +1,5 @@
 {{-- Listener pro new-comment --}}
-<div class="flex flex-col w-64 px-2 pt-2 m-4 text-base shadow-sm bg-gray-50 rounded-xl">
+<div class="flex flex-col px-2 pt-2 m-4 text-base shadow-sm w-96 bg-gray-50 rounded-xl">
     {{-- Tělo postu --}}
     <section class="bg-gray-50 rounded-xl">
         {{-- Autor --}}

@@ -7,6 +7,7 @@ use App\Helpers\Service;
 class LikeableComponent extends Component {
     public $item;
     public $likes;
+    public $did_user_like;
 
     protected function get_likeable() {
         return (new Service(get_called_class()))->likeable();
@@ -25,7 +26,11 @@ class LikeableComponent extends Component {
 
     public function like()
     {
-        $this->get_likeable()->like($this->item->id);
+        if ($this->did_user_like) {
+            $this->get_likeable()->unlike($this->item->id, auth()->id());
+        } else {
+            $this->get_likeable()->like($this->item->id);
+        }
         $this->emit("post-change");
     }
 
@@ -37,6 +42,8 @@ class LikeableComponent extends Component {
 
     public function render_like_section()
     {
-        return view("components.like-section", ["item" => $this->item])->render();
+        return view("components.like-section", [
+            "item" => $this->item
+        ])->render();
     }
 }

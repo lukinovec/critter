@@ -51,5 +51,35 @@
         @yield('content')
         @livewireScripts
         <script src="{{ url(asset('js/app.js')) }}"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script src="sweetalert2.all.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+        <script>
+        window.addEventListener("swal:test", event => {
+            async function test() {
+                const { value: file } = await Swal.fire({
+                  title: 'Select image (JPG or PNG)',
+                  input: 'file',
+                  inputAttributes: {
+                    'accept': 'image/*',
+                    'aria-label': 'Upload your profile picture'
+                  }
+                })
+                if (file) {
+                  const reader = new FileReader()
+                  reader.onload = (e) => {
+                    Swal.fire({
+                      title: 'Your uploaded picture',
+                      imageUrl: e.target.result,
+                      imageAlt: 'The uploaded picture'
+                    })
+                    Livewire.emit("upload-image", e.target.result)
+                  }
+                  reader.readAsDataURL(file)
+                }
+            }
+            test();
+        })
+        </script>
     </body>
 </html>
