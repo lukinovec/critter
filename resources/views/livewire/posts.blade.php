@@ -6,9 +6,9 @@
         </span>
         <div wire:loading wire:target='createPost' class="text-2xl font-bold text-pink-400">Přidávám post, počkaj... Nebuď nedočkavý</div>
         <div class="flex flex-wrap p-2 m-2" x-data="{ image: @entangle('image_name') }">
-            <input class="w-3/4 border-gray-200 rounded-lg" type="text" name="crit" wire:model.debounce="newPostText" placeholder="Your crit...">
+            <input class="w-3/4 border-2 border-gray-200 rounded-lg dark:bg-gray-800" type="text" name="crit" wire:model.debounce="newPostText" placeholder="Your crit...">
             <button class="p-2 m-1 border border-gray-200 rounded-lg hover:bg-gray-100" wire:click="createPost()">Post</button>
-            <button wire:click="testAlert()">Attach image</button>
+            <button wire:click="uploadImage()">Attach image</button>
             <span class="w-full" x-text="image"></span>
         </div>
     </span>

@@ -1,13 +1,11 @@
-<div class="p-2 m-1 rounded-lg bg-gray-50 hover:bg-gray-100">
+<div class="p-2 m-1 my-2 border-2 rounded-lg bg-gray-50 hover:bg-gray-100 dark:bg-transparent dark:border-gray-700">
     <span class="flex items-center justify-between space-x-2 text-xs">
-        <span class="flex">
-         <img class="w-3 h-3 m-1 rounded-full" src="{{ $comment->author->image }}" />
-         <a class="my-auto" href="{{ 'user/' . $comment->author->id }}">
-            {{ $comment->author->nickname }}
+        <a class="flex items-center my-auto" href="{{ 'user/' . $comment->author->id }}">
+            <img class="w-3 h-3 m-1 rounded-full" src="{{ $comment->author->image }}" />
+               {{ $comment->author->nickname }}
          </a>
-        </span>
         @if (auth()->id() === $comment->author->id)
-        <button class="text-red-900" wire:click="delete()">
+        <button class="text-red-800" wire:click="delete()">
             Delete Comment
         </button>
         @endif

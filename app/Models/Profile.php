@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Like;
 
 class Profile extends Model
 {
@@ -13,7 +14,10 @@ class Profile extends Model
 
     public function followers()
     {
-        return $this->hasMany(Follower::class);
+        return Like::where([
+            "parent" => "profile",
+            "parent_id" => $this->id
+        ])->get();
     }
 
     public function posts()

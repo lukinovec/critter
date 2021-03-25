@@ -21,7 +21,7 @@ class LikeableComponent extends Component {
     public function delete()
     {
         $this->get_likeable()->delete($this->item->id);
-        $this->emit("post-change");
+        $this->emit("item-change");
     }
 
     public function like()
@@ -31,13 +31,13 @@ class LikeableComponent extends Component {
         } else {
             $this->get_likeable()->like($this->item->id);
         }
-        $this->emit("post-change");
+        $this->emit("item-change");
     }
 
     public function unlike()
     {
         $this->get_likeable()->unlike($this->item->id, auth()->id());
-        $this->emit("post-change");
+        $this->emit("item-change");
     }
 
     public function render_like_section()

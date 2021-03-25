@@ -25,7 +25,7 @@ class Post extends LikeableComponent
             "post_id" => $this->item->id,
             "text" => $this->comment_text
         ]);
-        $this->emit("post-change");
+        $this->emit("item-change");
     }
 
     public function render()

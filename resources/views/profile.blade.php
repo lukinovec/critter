@@ -1,7 +1,7 @@
 @extends('template/layout')
 @section('content')
 <div class="flex flex-col items-center w-full h-full mt-20 text-lg text-center">
-    <section class="flex flex-col items-center justify-center w-40 h-40 p-4 bg-gray-100 rounded-full">
+    <section class="flex flex-col items-center justify-center w-40 h-40 p-4 bg-gray-100 rounded-full dark:bg-gray-900">
         <img class="w-24 h-24 rounded-full " src="{{ $profile->image }}" alt="profile image">
         <span>{{ $profile->nickname }}</span>
     </section>
